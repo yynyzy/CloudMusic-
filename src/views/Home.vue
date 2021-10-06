@@ -1,18 +1,27 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
+    <topNav></topNav>
+    <mySwiper></mySwiper>
+    <iconList></iconList>
+    <musicList></musicList>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
-import HelloWorld from '@/components/HelloWorld.vue'; // @ is an alias to /src
-
+import { defineComponent } from "vue";
+import topNav from "../components/topNav.vue";
+import MySwiper from "../components/MySwiper.vue";
+import IconList from "../components/IconList.vue";
+import musicList from "../components/musicList.vue";
 export default defineComponent({
-  name: 'Home',
+  name: "Home",
   components: {
-    HelloWorld,
+    topNav,
+    mySwiper: MySwiper,
+    iconList: IconList,
+    musicList,
   },
 });
 </script>
+<style lang="less" scoped>
+</style>

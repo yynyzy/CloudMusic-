@@ -1,30 +1,60 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+  <div>
+    <router-view />
+    <play-controller
+      v-if="
+        $router.currentRoute.value.path !== '/login' &&
+        $router.currentRoute.value.path !== '/my'
+      "
+    ></play-controller>
   </div>
-  <router-view/>
 </template>
-
+<script  lang='ts'>
+import { defineComponent, onMounted } from "vue";
+import playController from "./components/playController.vue";
+import { useStore } from "vuex";
+export default defineComponent({
+  name: "app",
+  components: {
+    playController,
+  },
+  setup() {
+    const store = useStore();
+    onMounted(() => {
+      let userData = JSON.parse(localStorage.userData);
+      store.commit("setUser", userData);
+    });
+    return {};
+  },
+});
+</script>
 <style lang="less">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "微软雅黑";
 }
-
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
+.icon {
+  width: 0.3rem;
+  height: 0.3rem;
+}
+a {
+  color: #333;
+  text-decoration: none;
+}
+html,
+body {
+  width: 100%;
+  height: 100%;
+  overflow: scroll;
+}
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  width: 0px;
+  height: 0px;
+}
+body {
+  margin: 0;
 }
 </style>
